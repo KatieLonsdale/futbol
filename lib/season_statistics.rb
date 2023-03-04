@@ -15,6 +15,16 @@ class SeasonStatistics < Stats
     team_by_id(team.first)
   end
 
+  def least_accurate_team
+    games_by_team = @game_teams.group_by {|game_team| game_team.team_id}
+    games_by_team = goals_and_shots_by_team(games_by_team)
+    games_by_team = games_by_team.transform_values! do |array| 
+      accuracy(array[0], array[1])
+    end
+    team = games_by_team.min_by{|team, accuracy| accuracy}
+    team_by_id(team.first)
+  end
+
   def goals_and_shots_by_team(hash)
     hash.transform_values do |games|
       [goals = 0, shots = 0]
