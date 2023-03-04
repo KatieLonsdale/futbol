@@ -51,4 +51,18 @@ end
       expect(@stat_tracker.percentage_ties).to be_a Float
     end
   end
+
+  describe '#most_accurate_team' do
+    it 'returns the team with the best ratio of shots to goals' do
+      expect(@stat_tracker.most_accurate_team('20122013')).to eq('DC United')
+      expect(@stat_tracker.most_accurate_team('20142015')).to eq('Orlando Pride')
+    end
+  end
+
+  describe '#least_accurate_team' do
+    it 'returns the team with the worst ratio of shots to goals' do
+      expect(@stat_tracker.least_accurate_team('20122013')).to eq('Houston Dynamo')
+      expect(@stat_tracker.least_accurate_team('20142015')).to eq('New England Revolution')
+    end
+  end
 end

@@ -2,9 +2,9 @@ require './spec/spec_helper'
 
 RSpec.describe SeasonStatistics do
   before(:each) do
-    games = './data/games.csv'
+    games = './data/mock_games.csv'
     teams = './data/teams.csv'
-    game_teams = './data/game_teams.csv'
+    game_teams = './data/mock_game_teams.csv'
     @locations = {
       games: games,
       teams: teams,
@@ -31,6 +31,58 @@ RSpec.describe SeasonStatistics do
     it 'has game_teams' do
       expect(@season_stats.game_teams).to be_a Array
       expect(@season_stats.game_teams.sample).to be_a GameTeams
+    end
+  end
+
+  describe '#most_accurate_team' do
+    it 'returns the team with the best ratio of shots to goals' do
+      expect(@season_stats.most_accurate_team('20122013')).to eq('FC Dallas')
+      expect(@season_stats.most_accurate_team('20142015')).to eq('Utah Royals FC')
+    end
+  end
+
+  describe '#least_accurate_team' do
+    it 'returns the team with the worst ratio of shots to goals' do
+      expect(@season_stats.least_accurate_team('20122013')).to eq('Houston Dynamo')
+      expect(@season_stats.least_accurate_team('20142015')).to eq('Columbus Crew SC')
+      # not sure what to do in event of tie
+    end
+  end
+
+  describe '#filter_game_teams_by_season' do
+    it 'returns list of game teams that took place in given season' do
+      filtered_games = @season_stats.filter_game_teams_by_season('20122013')
+      expect(filtered_games.all?{|game| game.game_id.start_with?('2012')}).to be true
+    end
+  end
+
+  describe '#goals_and_shots_by_team' do
+    it 'returns a new hash with values as array of goals and shots' do
+      mock_game_1 = double()
+      mock_game_2 = double()
+      given_hash = {team: [mock_game_1], team2: [mock_game_2]}
+      expected_hash = {team: [2, 5], team2: [4, 7]}
+
+      allow(mock_game_1).to receive(:goals).and_return('2')
+      allow(mock_game_1).to receive(:shots).and_return('5')
+      allow(mock_game_2).to receive(:goals).and_return('4')
+      allow(mock_game_2).to receive(:shots).and_return('7')
+
+      expect(@season_stats.goals_and_shots_by_team(given_hash)).to eq(expected_hash)
+    end
+  end
+
+  describe '#accuracy' do
+    it 'returns goals divided by number of shots' do
+      expect(@season_stats.accuracy(5,10)).to eq 0.50
+      expect(@season_stats.accuracy(3, 9)).to eq 0.33
+    end
+  end
+
+  describe '#team_by_id' do
+    it 'returns team based on given team id' do
+      expect(@season_stats.team_by_id(1)).to eq('Atlanta United')
+      expect(@season_stats.team_by_id(13)).to eq('Houston Dash')
     end
   end
 end
