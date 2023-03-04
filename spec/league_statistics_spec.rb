@@ -32,33 +32,55 @@ RSpec.describe LeagueStatistics do
       expect(@league_stats.game_teams).to be_a Array
       expect(@league_stats.game_teams.sample).to be_a GameTeams
     end
+  end
 
-    it 'can count teams' do
-      expect(@league_stats.count_of_teams).to eq(32)
-    end
+  it 'can count teams' do
+    expect(@league_stats.count_of_teams).to eq(32)
+  end
 
-    it 'can determine best offense' do
-      expect(@league_stats.best_offense).to eq("Chicago Fire")
-    end
+  it 'can determine best offense' do
+    expect(@league_stats.best_offense).to eq("Chicago Fire")
+  end
 
-    xit 'can determine the worst offense' do
-      expect(@league_stats.worst_offense).to eq("Utah Royals FC")
-    end
+  it 'can determine the worst offense' do
+    expect(@league_stats.worst_offense).to eq("Sky Blue FC")
+  end
 
-    xit 'can determine highest scoring visitor' do
-      expect(@league_stats.highest_scoring_visitor).to eq("FC Dallas")
-    end
 
-    xit 'can determine highest scoring home team' do
-      expect(@league_stats.highest_scoring_home_team).to eq("Reign FC")
-    end
+  xit 'can determine highest scoring visitor' do
+    expect(@league_stats.highest_scoring_visitor).to eq("FC Dallas")
+  end
 
-    xit 'can determine lowest scoring visitor' do
-      expect(@league_stats.lowest_scoring_visitor).to eq("San Jose Earthquakes")
-    end
+  xit 'can determine highest scoring home team' do
+    expect(@league_stats.highest_scoring_home_team).to eq("Reign FC")
+  end
 
-    xit 'can determine lowest scoring home team' do
-      expect(@league_stats.lowest_scoring_home_team).to eq("Utah Royals FC")
+  xit 'can determine lowest scoring visitor' do
+    expect(@league_stats.lowest_scoring_visitor).to eq("San Jose Earthquakes")
+  end
+
+  xit 'can determine lowest scoring home team' do
+    expect(@league_stats.lowest_scoring_home_team).to eq("Utah Royals FC")
+  end
+
+  describe 'helper methods' do
+    describe '#average_number_of_goals' do
+      xit 'returns the average number of goals per season' do
+        expect().to eq()
+ 
+      end
+
+      xit 'total_goals' do
+        expect().to eq()
+      end
+
+      xit 'total_game_by_team' do
+        expect().to eq()
+      end
+
+      xit 'team_id_converter' do
+        expect().to eq()
+      end
     end
   end
 end
