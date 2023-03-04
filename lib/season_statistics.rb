@@ -66,7 +66,7 @@ class SeasonStatistics < Stats
   end
 
   def accuracy(goals, shots)
-    goals.fdiv(shots).round(2)
+    goals.fdiv(shots).round(5)
   end
 
   def team_by_id(id)
