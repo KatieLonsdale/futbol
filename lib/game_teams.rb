@@ -14,8 +14,8 @@ class GameTeams
     @hoa = game_teams_info[:hoa]
     @result = game_teams_info[:result]
     @head_coach = game_teams_info[:head_coach]
-    @goals = game_teams_info[:goals]
-    @shots = game_teams_info[:shots]
-    @tackles = game_teams_info[:tackles]
+    @goals = game_teams_info[:goals].to_i
+    @shots = game_teams_info[:shots].to_i
+    @tackles = game_teams_info[:tackles].to_i
   end
 end

@@ -62,6 +62,8 @@ class GameStatistics < Stats
     average_goals_by_season
   end
 
+# Helper Methods
+
   def sorted_scores
     scores = []
     @games.each do |game|

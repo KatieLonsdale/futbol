@@ -2,9 +2,9 @@ require './spec/spec_helper'
 
 RSpec.describe LeagueStatistics do
   before(:each) do
-    games = './data/games.csv'
+    games = './data/mock_games.csv'
     teams = './data/teams.csv'
-    game_teams = './data/game_teams.csv'
+    game_teams = './data/mock_game_teams.csv'
     @locations = {
       games: games,
       teams: teams,
@@ -37,8 +37,8 @@ RSpec.describe LeagueStatistics do
       expect(@league_stats.count_of_teams).to eq(32)
     end
 
-    xit 'can determine best offense' do
-      expect(@league_stats.best_offense).to eq("Reign FC")
+    it 'can determine best offense' do
+      expect(@league_stats.best_offense).to eq("Chicago Fire")
     end
 
     xit 'can determine the worst offense' do
