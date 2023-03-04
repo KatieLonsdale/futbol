@@ -42,7 +42,7 @@ RSpec.describe SeasonStatistics do
   end
 
   describe '#least_accurate_team' do
-    xit 'returns the team with the worst ratio of shots to goals' do
+    it 'returns the team with the worst ratio of shots to goals' do
       expect(@season_stats.least_accurate_team('20122013')).to eq('Houston Dynamo')
       expect(@season_stats.least_accurate_team('20142015')).to eq('Columbus Crew SC')
       # not sure what to do in event of tie
