@@ -62,4 +62,11 @@ RSpec.describe SeasonStatistics do
       expect(@season_stats.accuracy(3, 9)).to eq 0.33
     end
   end
+
+  describe '#team_by_id' do
+    it 'returns team based on given team id' do
+      expect(@season_stats.team_by_id(1)).to eq('Atlanta United')
+      expect(@season_stats.team_by_id(13)).to eq('Houston Dash')
+    end
+  end
 end
