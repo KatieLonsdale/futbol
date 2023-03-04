@@ -17,7 +17,6 @@ class LeagueStatistics < Stats
     sorted = best_offense.sort_by { |_,v| -v }
     team_id_string = sorted[0][0]
     team_id_converter(team_id_string)
-    require 'pry-byebug'; require 'pry'; binding.pry
   end
 
   def worst_offense
@@ -60,14 +59,22 @@ class LeagueStatistics < Stats
 
   
   def highest_scoring_visitor
-    hash = Hash.new(0)
-    team = @teams.find do |team|
+    visitor_team_games = Hash.new(0)
+    @game_teams.each do |game_team|
+      visitor_team_games[game_team.team_id] = games_when_visitor(game_team)
     end
+    require 'pry'; binding.pry
   end
+
+  def games_when_visitor(game_team)
+    game_team if game_team.hoa == "away"
+  end
+
 # create a hash
 # team ID to be keys
-# average score per game across all seasons is value
-#if conditional- when away team 
+# array of visiting games to be values
+# find the average score of values
+# sort hash by values
 # sort hash by values
 # helper meth-team id and highest score away avg
 # return string
