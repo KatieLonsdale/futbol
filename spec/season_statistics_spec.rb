@@ -35,8 +35,24 @@ RSpec.describe SeasonStatistics do
   end
 
   describe '#most_accurate_team' do
-    xit 'returns the team with the best ratio of shots to goals' do
+    it 'returns the team with the best ratio of shots to goals' do
       expect(@season_stats.most_accurate_team).to eq('Utah Royals FC')
+    end
+  end
+
+  describe '#goals_and_shots_by_team' do
+    it 'returns a new hash with values as array of goals and shots' do
+      mock_game_1 = double()
+      mock_game_2 = double()
+      given_hash = {team: [mock_game_1], team2: [mock_game_2]}
+      expected_hash = {team: [2, 5], team2: [4, 7]}
+
+      allow(mock_game_1).to receive(:goals).and_return('2')
+      allow(mock_game_1).to receive(:shots).and_return('5')
+      allow(mock_game_2).to receive(:goals).and_return('4')
+      allow(mock_game_2).to receive(:shots).and_return('7')
+
+      expect(@season_stats.goals_and_shots_by_team(given_hash)).to eq(expected_hash)
     end
   end
 
