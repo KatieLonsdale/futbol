@@ -13,6 +13,8 @@ class StatTracker
     StatTracker.new(locations)
   end
 
+  # Game Stats
+
   def percentage_home_wins
     @game.percentage_home_wins
   end
@@ -23,6 +25,17 @@ class StatTracker
 
   def percentage_ties
     @game.percentage_ties
+  end
+
+  # League Stats
+
+  # Season Stats
+  def most_accurate_team(season)
+    @season.most_accurate_team(season)
+  end
+
+  def least_accurate_team(season)
+    @season.least_accurate_team(season)
   end
 end
 
