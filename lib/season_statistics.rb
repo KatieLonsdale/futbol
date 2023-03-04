@@ -5,22 +5,15 @@ class SeasonStatistics < Stats
     super
   end
 
-  # def most_accurate_team
-  #   # group by team id values shots goals
-  #   # shots for all games = game.shots
-  #   # goals for all games = game.goals
-  #   # get ratio of shots to goals (accuracy helper method)
-  #   # sort by accuracy
-  #   # return most accurate
-
-  #   games_by_team = @game_teams.group_by {|game_team| game_team.team_id}
-  #   games_by_team = goals_and_shots_by_team(games_by_team)
-  #   games_by_team = games_by_team.transform_values! do |array| 
-  #     accuracy(array[0], array[1])
-  #   end
-  #   games_by_team.max_by{|team, accuracy| accuracy}
-  #   require 'pry'; binding.pry
-  # end
+  def most_accurate_team
+    games_by_team = @game_teams.group_by {|game_team| game_team.team_id}
+    games_by_team = goals_and_shots_by_team(games_by_team)
+    games_by_team = games_by_team.transform_values! do |array| 
+      accuracy(array[0], array[1])
+    end
+    team = games_by_team.max_by{|team, accuracy| accuracy}
+    team_by_id(team.first)
+  end
 
   def goals_and_shots_by_team(hash)
     hash.transform_values do |games|
@@ -35,5 +28,10 @@ class SeasonStatistics < Stats
 
   def accuracy(goals, shots)
     goals.fdiv(shots).round(2)
+  end
+
+  def team_by_id(id)
+    team = @teams.find{|team| team.team_id == id.to_s}
+    team.team_name
   end
 end
