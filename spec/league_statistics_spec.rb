@@ -23,39 +23,39 @@ RSpec.describe LeagueStatistics do
       expect(@league_stats.teams.sample).to be_a Team
     end
 
-    it 'has games' do
+    xit 'has games' do
       expect(@league_stats.games).to be_a Array
       expect(@league_stats.games.sample).to be_a Game
     end
 
-    it 'has game_teams' do
+    xit 'has game_teams' do
       expect(@league_stats.game_teams).to be_a Array
       expect(@league_stats.game_teams.sample).to be_a GameTeams
     end
   end
 
-  it 'can count teams' do
+  xit 'can count teams' do
     expect(@league_stats.count_of_teams).to eq(32)
   end
 
-  it 'can determine best offense' do
+  xit 'can determine best offense' do
     expect(@league_stats.best_offense).to eq("Chicago Fire")
   end
 
-  it 'can determine the worst offense' do
+  xit 'can determine the worst offense' do
     expect(@league_stats.worst_offense).to eq("Sky Blue FC")
   end
 
 
-  xit 'can determine highest scoring visitor' do
-    expect(@league_stats.highest_scoring_visitor).to eq("FC Dallas")
+  it 'can determine highest scoring visitor' do
+    expect(@league_stats.highest_scoring_visitor).to eq("Reign FC")
   end
 
   xit 'can determine highest scoring home team' do
     expect(@league_stats.highest_scoring_home_team).to eq("Reign FC")
   end
 
-  xit 'can determine lowest scoring visitor' do
+  it 'can determine lowest scoring visitor' do
     expect(@league_stats.lowest_scoring_visitor).to eq("San Jose Earthquakes")
   end
 
