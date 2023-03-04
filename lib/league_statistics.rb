@@ -12,15 +12,29 @@ class LeagueStatistics < Stats
   def best_offense
     best_offense = Hash.new(0)
     @game_teams.each do |game_team|
-      average_number_of_goals = (total_goals(game_team.team_id)).fdiv(total_games_by_team(game_team.team_id))
-      best_offense[game_team.team_id] = average_number_of_goals
+      best_offense[game_team.team_id] = average_number_of_goals(game_team)
     end
     sorted = best_offense.sort_by { |_,v| -v }
     team_id_string = sorted[0][0]
     team_id_converter(team_id_string)
+    require 'pry-byebug'; require 'pry'; binding.pry
   end
 
-  def total_goals(team_id)
+  def worst_offense
+    worst_offense = Hash.new(0)
+    @game_teams.each do |game_team|
+      worst_offense[game_team.team_id] = average_number_of_goals(game_team)
+    end
+    sorted = worst_offense.sort_by { |_,v| v }
+    team_id_string = sorted[0][0]
+    team_id_converter(team_id_string)
+  end
+
+  def average_number_of_goals(game_team)
+    (total_goals_by_team(game_team.team_id)).fdiv(total_games_by_team(game_team.team_id))
+  end
+
+  def total_goals_by_team(team_id)
     total_goals = 0
     @game_teams.each do |game_team|
       total_goals += game_team.goals if game_team.team_id == team_id
@@ -44,9 +58,7 @@ class LeagueStatistics < Stats
     best_team
   end
 
-  # def worst_offense
-  # end
-
+  
   # def highest_scoring_visitor
   #   team = @teams.find do |team|
   #     team.team_id == 
