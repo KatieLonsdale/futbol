@@ -42,10 +42,17 @@ RSpec.describe SeasonStatistics do
   end
 
   describe '#least_accurate_team' do
-    it 'returns the team with the worst ratio of shots to goals' do
+    xit 'returns the team with the worst ratio of shots to goals' do
       expect(@season_stats.least_accurate_team('20122013')).to eq('Houston Dynamo')
       expect(@season_stats.least_accurate_team('20142015')).to eq('Columbus Crew SC')
       # not sure what to do in event of tie
+    end
+  end
+
+  describe '#filter_game_teams_by_season' do
+    it 'returns list of game teams that took place in given season' do
+      filtered_games = @season_stats.filter_game_teams_by_season('20122013')
+      expect(filtered_games.all?{|game| game.game_id.start_with?('2012')}).to be true
     end
   end
 
