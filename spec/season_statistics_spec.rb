@@ -49,6 +49,21 @@ RSpec.describe SeasonStatistics do
     end
   end
 
+  describe '#most_tackles' do
+    it 'returns the team with the most tackles in given season' do
+      expect(@season_stats.most_tackles('20122013')).to eq('FC Dallas')
+      expect(@season_stats.most_tackles('20142015')).to eq('Orlando Pride')
+    end
+  end
+
+  describe '#least_tackles' do
+    it 'returns the team with the least tackles in given season' do
+      expect(@season_stats.most_tackles('20122013')).to eq('Houston Dynamo')
+      expect(@season_stats.most_tackles('20142015')).to eq('Chicago Fire')
+
+    end
+  end
+
   describe '#filter_game_teams_by_season' do
     it 'returns list of game teams that took place in given season' do
       filtered_games = @season_stats.filter_game_teams_by_season('20122013')
