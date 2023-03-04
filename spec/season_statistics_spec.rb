@@ -40,6 +40,12 @@ RSpec.describe SeasonStatistics do
     end
   end
 
+  describe '#least_accurate_team' do
+    it 'returns the team with the worst ratio of shots to goals' do
+      expect(@season_stats.least_accurate_team).to eq('Sky Blue FC')
+    end
+  end
+
   describe '#goals_and_shots_by_team' do
     it 'returns a new hash with values as array of goals and shots' do
       mock_game_1 = double()
