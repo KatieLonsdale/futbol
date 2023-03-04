@@ -86,27 +86,27 @@ class LeagueStatistics < Stats
       goals = games.sum{|game| game.goals}
       goals.fdiv(games.length)
     end
-    
   end
-# create a hash
-# team ID to be keys
-# array of visiting games to be values
-# average score of values
-# sort hash by values
-# sort hash by values
-# helper meth-team id and highest score away avg
-# return string
 
+  def highest_scoring_home_team
+    grouped_teams = @game_teams.group_by { |game| game.team_id}
+    sorted_teams = grouped_teams.transform_values do |games|
+      games.select{|game| game.hoa == "home"}
+    end
+    avg_game = avg_score_away_games(sorted_teams)
+    highest_scoring_home_array = avg_game.max_by { |team, avg_score| avg_score}
+    id_string = highest_scoring_home_array[0]
+    team_id_converter(id_string)
+  end
 
-
-
-  # def highest_scoring_home_team
-  # end
-
-
-  # def lowest_scoring_visitor
-  # end
-
-  # def lowest_scoring_home_team
-  # end
+  def lowest_scoring_home_team
+    grouped_teams = @game_teams.group_by { |game| game.team_id}
+    sorted_teams = grouped_teams.transform_values do |games|
+      games.select{|game| game.hoa == "home"}
+    end
+    avg_game = avg_score_away_games(sorted_teams)
+    lowest_scoring_home_array = avg_game.max_by { |team, avg_score| -avg_score}
+    id_string = lowest_scoring_home_array[0]
+    team_id_converter(id_string)
+  end
 end
