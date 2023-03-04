@@ -2,9 +2,9 @@ require './spec/spec_helper'
 
 RSpec.describe LeagueStatistics do
   before(:each) do
-    games = './data/games.csv'
+    games = './data/mock_games.csv'
     teams = './data/teams.csv'
-    game_teams = './data/game_teams.csv'
+    game_teams = './data/mock_game_teams.csv'
     @locations = {
       games: games,
       teams: teams,
