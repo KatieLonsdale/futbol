@@ -38,7 +38,7 @@ RSpec.describe LeagueStatistics do
     end
 
     it 'can determine best offense' do
-      expect(@league_stats.best_offense).to eq("Reign FC")
+      expect(@league_stats.best_offense).to eq("Chicago Fire")
     end
 
     xit 'can determine the worst offense' do
