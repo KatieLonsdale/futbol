@@ -60,35 +60,21 @@ class LeagueStatistics < Stats
 
   
   def highest_scoring_visitor
-    visitor_games = Hash.new(0)
-    @game_teams.each do |game_team|
-      visitor_games[game_team.team_id] = avg_score_away_games
-      require 'pry'; binding.pry
-    end
-  end
-
-  def array_of_visiting_games(game_team)
-    array_of_visiting_games = []
-    array_of_visiting_games << game_team if game_team.hoa == "away"
-  end
-
-  
-  def avg_score_away_games
     grouped_teams = @games_teams.group_by { |game| game.team_id}
-    sorted_team = grouped_teams.transform_values do |array|
-    array.select{|game| game.hoa == "away"}
+    sorted_team = grouped_teams.transform_values do |games|
+      games.select{|game| game.hoa == "away"}
     end
-    goals = 0
-    sorted_team.values.each do |game|
-      goals += game.goals
-    end
+  end
+
+  def avg_score_away_games
     goals
-    goals.fdiv(sorted_teams.length)
+    avg_goals = goals.fdiv(sorted_teams.length)
+    grouped_teams[game_team.team_id] = avg_goals
   end
 # create a hash
 # team ID to be keys
 # array of visiting games to be values
-# find the average score of values
+# average score of values
 # sort hash by values
 # sort hash by values
 # helper meth-team id and highest score away avg
