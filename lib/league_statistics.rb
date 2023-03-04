@@ -59,14 +59,25 @@ class LeagueStatistics < Stats
   end
 
   
-  # def highest_scoring_visitor
-  #   team = @teams.find do |team|
-  #     team.team_id == 
-  #   end
-  # end
+  def highest_scoring_visitor
+    hash = Hash.new(0)
+    team = @teams.find do |team|
+    end
+  end
+# create a hash
+# team ID to be keys
+# average score per game across all seasons is value
+#if conditional- when away team 
+# sort hash by values
+# helper meth-team id and highest score away avg
+# return string
+
+
+
 
   # def highest_scoring_home_team
   # end
+
 
   # def lowest_scoring_visitor
   # end
