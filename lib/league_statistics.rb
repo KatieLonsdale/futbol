@@ -60,16 +60,35 @@ class LeagueStatistics < Stats
 
   
   def highest_scoring_visitor
-    grouped_teams = @games_teams.group_by { |game| game.team_id}
-    sorted_team = grouped_teams.transform_values do |games|
+    grouped_teams = @game_teams.group_by { |game| game.team_id}
+    sorted_teams = grouped_teams.transform_values do |games|
       games.select{|game| game.hoa == "away"}
     end
+    avg_game = avg_score_away_games(sorted_teams)
+    highest_scoring_visitor_array = avg_game.max_by { |team, avg_score| avg_score}
+    id_string = highest_scoring_visitor_array[0]
+    team_id_converter(id_string)
+    require 'pry'; binding.pry
+  end
+  
+  def highest_scoring_visitor
+    grouped_teams = @game_teams.group_by { |game| game.team_id}
+    sorted_teams = grouped_teams.transform_values do |games|
+      games.select{|game| game.hoa == "away"}
+    end
+    avg_game = avg_score_away_games(sorted_teams)
+    highest_scoring_visitor_array = avg_game.max_by { |team, avg_score| avg_score}
+    id_string = highest_scoring_visitor_array[0]
+    team_id_converter(id_string)
+    require 'pry'; binding.pry
   end
 
-  def avg_score_away_games
-    goals
-    avg_goals = goals.fdiv(sorted_teams.length)
-    grouped_teams[game_team.team_id] = avg_goals
+  def avg_score_away_games(sorted_teams)
+    sorted_teams.transform_values do |games|
+      goals = games.sum{|game| game.goals}
+      goals.fdiv(games.length)
+    end
+    
   end
 # create a hash
 # team ID to be keys
