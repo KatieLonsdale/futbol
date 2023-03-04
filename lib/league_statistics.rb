@@ -8,9 +8,22 @@ class LeagueStatistics < Stats
   def count_of_teams
     @teams.count
   end
-
-  # def best_offense
-  # end
+#Name of the team with the highest average number of goals scored per game across all seasons.
+  def best_offense
+    best_offense = Hash.new(0)
+    @game_teams.each do |game_team|
+      average_number_of_goals = (game_team.goals).fdiv(count_of_teams)
+      best_offense[game_team.team_id] += average_number_of_goals
+    end
+    best_offense.values
+    require 'pry'; binding.pry
+  end
+# create hash - keys are team id
+# values are average goals scored per game
+# sort values 
+# return highest value
+# convert highest value's key to actual team name.
+ # return team name
 
   # def worst_offense
   # end
