@@ -5,8 +5,9 @@ class SeasonStatistics < Stats
     super
   end
 
-  def most_accurate_team
-    games_by_team = @game_teams.group_by {|game_team| game_team.team_id}
+  def most_accurate_team(season)
+    games_in_season = filter_game_teams_by_season(season)
+    games_by_team = games_in_season.group_by {|game_team| game_team.team_id}
     games_by_team = goals_and_shots_by_team(games_by_team)
     games_by_team = games_by_team.transform_values! do |array| 
       accuracy(array[0], array[1])
@@ -15,14 +16,20 @@ class SeasonStatistics < Stats
     team_by_id(team.first)
   end
 
-  def least_accurate_team
-    games_by_team = @game_teams.group_by {|game_team| game_team.team_id}
+  def least_accurate_team(season)
+    games_in_season = filter_game_teams_by_season(season)
+    games_by_team = games_in_season.group_by {|game_team| game_team.team_id}
     games_by_team = goals_and_shots_by_team(games_by_team)
     games_by_team = games_by_team.transform_values! do |array| 
       accuracy(array[0], array[1])
     end
     team = games_by_team.min_by{|team, accuracy| accuracy}
     team_by_id(team.first)
+  end
+
+  def filter_game_teams_by_season(season)
+    year = season[0,4]
+    @game_teams.select{|game| game.game_id.start_with?(year)}
   end
 
   def goals_and_shots_by_team(hash)
