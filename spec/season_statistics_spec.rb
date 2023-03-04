@@ -56,10 +56,10 @@ RSpec.describe SeasonStatistics do
     end
   end
 
-  describe '#least_tackles' do
-    xit 'returns the team with the least tackles in given season' do
-      expect(@season_stats.most_tackles('20122013')).to eq('FC Dallas')
-      expect(@season_stats.most_tackles('20142015')).to eq('New England Revolution')
+  describe '#fewest_tackles' do
+    it 'returns the team with the least tackles in given season' do
+      expect(@season_stats.fewest_tackles('20122013')).to eq('FC Dallas')
+      expect(@season_stats.fewest_tackles('20142015')).to eq('New England Revolution')
     end
   end
 
@@ -75,7 +75,7 @@ RSpec.describe SeasonStatistics do
       mock_game_1 = double()
       mock_game_2 = double()
       given_hash = {team: [mock_game_1], team2: [mock_game_2]}
-      expected_hash = {team: [20], team2: [30]}
+      expected_hash = {team: 20, team2: 30}
 
       allow(mock_game_1).to receive(:tackles).and_return(20)
       allow(mock_game_2).to receive(:tackles).and_return(30)
