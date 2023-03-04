@@ -49,10 +49,38 @@ RSpec.describe SeasonStatistics do
     end
   end
 
+  describe '#most_tackles' do
+    it 'returns the team with the most tackles in given season' do
+      expect(@season_stats.most_tackles('20122013')).to eq('Houston Dynamo')
+      expect(@season_stats.most_tackles('20142015')).to eq('Orlando Pride')
+    end
+  end
+
+  describe '#fewest_tackles' do
+    it 'returns the team with the least tackles in given season' do
+      expect(@season_stats.fewest_tackles('20122013')).to eq('FC Dallas')
+      expect(@season_stats.fewest_tackles('20142015')).to eq('New England Revolution')
+    end
+  end
+
   describe '#filter_game_teams_by_season' do
     it 'returns list of game teams that took place in given season' do
       filtered_games = @season_stats.filter_game_teams_by_season('20122013')
       expect(filtered_games.all?{|game| game.game_id.start_with?('2012')}).to be true
+    end
+  end
+
+  describe '#tackles_by_team' do
+    it 'returns number of tackles by team' do
+      mock_game_1 = double()
+      mock_game_2 = double()
+      given_hash = {team: [mock_game_1], team2: [mock_game_2]}
+      expected_hash = {team: 20, team2: 30}
+
+      allow(mock_game_1).to receive(:tackles).and_return(20)
+      allow(mock_game_2).to receive(:tackles).and_return(30)
+
+      expect(@season_stats.tackles_by_team(given_hash)).to eq(expected_hash)
     end
   end
 
@@ -74,8 +102,8 @@ RSpec.describe SeasonStatistics do
 
   describe '#accuracy' do
     it 'returns goals divided by number of shots' do
-      expect(@season_stats.accuracy(5,10)).to eq 0.50
-      expect(@season_stats.accuracy(3, 9)).to eq 0.33
+      expect(@season_stats.accuracy(5,10)).to eq 0.50000
+      expect(@season_stats.accuracy(3, 9)).to eq 0.33333
     end
   end
 

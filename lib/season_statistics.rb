@@ -27,9 +27,31 @@ class SeasonStatistics < Stats
     team_by_id(team.first)
   end
 
+  def most_tackles(season)
+    games_in_season = filter_game_teams_by_season(season)
+    games_by_team = games_in_season.group_by{|game_team| game_team.team_id}
+    games_by_team = tackles_by_team(games_by_team)
+    team = games_by_team.max_by{|team, tackles| tackles}
+    team_by_id(team.first)
+  end
+
+  def fewest_tackles(season)
+    games_in_season = filter_game_teams_by_season(season)
+    games_by_team = games_in_season.group_by{|game_team| game_team.team_id}
+    games_by_team = tackles_by_team(games_by_team)
+    team = games_by_team.min_by{|team, tackles| tackles}
+    team_by_id(team.first)
+  end
+
   def filter_game_teams_by_season(season)
     year = season[0,4]
     @game_teams.select{|game| game.game_id.start_with?(year)}
+  end
+
+  def tackles_by_team(hash)
+    hash.transform_values do |games| 
+      games.sum{|game| game.tackles}
+    end
   end
 
   def goals_and_shots_by_team(hash)
@@ -44,7 +66,7 @@ class SeasonStatistics < Stats
   end
 
   def accuracy(goals, shots)
-    goals.fdiv(shots).round(2)
+    goals.fdiv(shots).round(5)
   end
 
   def team_by_id(id)

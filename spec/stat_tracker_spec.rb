@@ -55,14 +55,28 @@ end
   describe '#most_accurate_team' do
     it 'returns the team with the best ratio of shots to goals' do
       expect(@stat_tracker.most_accurate_team('20122013')).to eq('DC United')
-      expect(@stat_tracker.most_accurate_team('20142015')).to eq('Orlando Pride')
+      expect(@stat_tracker.most_accurate_team('20142015')).to eq('Toronto FC')
     end
   end
 
   describe '#least_accurate_team' do
     it 'returns the team with the worst ratio of shots to goals' do
-      expect(@stat_tracker.least_accurate_team('20122013')).to eq('Houston Dynamo')
-      expect(@stat_tracker.least_accurate_team('20142015')).to eq('New England Revolution')
+      expect(@stat_tracker.least_accurate_team('20122013')).to eq('New York City FC')
+      expect(@stat_tracker.least_accurate_team('20142015')).to eq('Columbus Crew SC')
+    end
+  end
+
+  describe '#most_tackles' do
+    it 'returns the team with the most tackles in given season' do
+      expect(@stat_tracker.most_tackles('20122013')).to eq('FC Cincinnati')
+      expect(@stat_tracker.most_tackles('20142015')).to eq('Seattle Sounders FC')
+    end
+  end
+
+  describe '#fewest_tackles' do
+    it 'returns the team with the least tackles in given season' do
+      expect(@stat_tracker.fewest_tackles('20122013')).to eq('Atlanta United')
+      expect(@stat_tracker.fewest_tackles('20142015')).to eq('Orlando City SC')
     end
   end
 end
