@@ -56,11 +56,11 @@ RSpec.describe LeagueStatistics do
   end
 
   it 'can determine lowest scoring visitor' do
-    expect(@league_stats.lowest_scoring_visitor).to eq("San Jose Earthquakes")
+    expect(@league_stats.lowest_scoring_visitor).to eq("Chicago Red Stars")
   end
 
-  xit 'can determine lowest scoring home team' do
-    expect(@league_stats.lowest_scoring_home_team).to eq("Utah Royals FC")
+  it 'can determine lowest scoring home team' do
+    expect(@league_stats.lowest_scoring_home_team).to eq("Portland Timbers")
   end
 
   describe 'helper methods' do
