@@ -102,8 +102,8 @@ RSpec.describe SeasonStatistics do
 
   describe '#accuracy' do
     it 'returns goals divided by number of shots' do
-      expect(@season_stats.accuracy(5,10)).to eq 0.50
-      expect(@season_stats.accuracy(3, 9)).to eq 0.33
+      expect(@season_stats.accuracy(5,10)).to eq 0.50000
+      expect(@season_stats.accuracy(3, 9)).to eq 0.33333
     end
   end
 
