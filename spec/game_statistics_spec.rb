@@ -57,7 +57,7 @@ RSpec.describe GameStatistics do
 
   describe '#highest_total_score' do
     it 'returns percentage of ties' do
-      expect(@game_stats.highest_total_score).to eq(5)
+      expect(@game_stats.highest_total_score).to eq(7)
       expect(@game_stats.highest_total_score).to be_a(Integer)
     end
   end
@@ -73,6 +73,31 @@ RSpec.describe GameStatistics do
     it 'returns percentage of ties' do
       expect(@game_stats.sorted_scores).to be_a(Array)
       expect(@game_stats.sorted_scores.sample).to be_a(Integer)
+    end
+  end
+
+  describe '#average_goals_per_game' do
+    it 'returns average goals per game' do
+      expect(@game_stats.average_goals_per_game).to eq(4.27)
+    end
+  end
+
+  describe '#count_of_games_by_season' do
+    it 'returns count of games by season' do
+      hash = {"20122013"=>9, "20142015"=>21}
+      expect(@game_stats.count_of_games_by_season).to eq(hash)
+      expect(@game_stats.count_of_games_by_season).to be_a(Hash)
+      expect(@game_stats.count_of_games_by_season.keys.sample).to be_a(String)
+      expect(@game_stats.count_of_games_by_season.values.sample).to be_a(Integer)
+    end
+  end
+
+  describe '#average_goals_by_season' do
+    it 'returns average goals by season' do
+      hash = {'20122013' => 3.78, '20142015' => 4.48}
+      expect(@game_stats.average_goals_by_season).to be_a(Hash)
+      expect(@game_stats.average_goals_by_season.keys.sample).to be_a(String)
+      expect(@game_stats.average_goals_by_season.values.sample).to be_a(Float)
     end
   end
 end

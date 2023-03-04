@@ -32,26 +32,36 @@ class GameStatistics < Stats
   def highest_total_score
     highest_score = sorted_scores.last
     highest_score
-
-    # iterate over each game
-    # summate home_goals & away_goals
-    # shovel sum into array of sums
-    # sort array
-    # return the last element which will be the highest total score 
   end
 
   def lowest_total_score
     lowest_score = sorted_scores.first
-    lowest_score
-
-    # iterate over each game
-    # summate home_goals & away_goals
-    # shovel sum into array of sums
-    # sort array
-    # return the first element which will be the lowest total score 
+    lowest_score 
   end
 
-# helper method
+  def average_goals_per_game
+    average_score = (sorted_scores.sum).fdiv(sorted_scores.length)
+    average_score.round(2)
+  end
+
+  def count_of_games_by_season
+    game_by_season = Hash.new(0)
+    @games.each do |game| 
+      game_by_season[game.season] += 1
+    end
+    game_by_season
+  end
+
+  def average_goals_by_season
+    average_goals_by_season = Hash.new(0)
+    @games.each do |game|
+      average_goals = (game.away_goals + game.home_goals).fdiv(season(game.season).count).round(2)
+      average_goals_by_season[game.season] += (average_goals)
+      (sorted_scores.sum).fdiv(sorted_scores.length)
+    end
+    average_goals_by_season
+  end
+
   def sorted_scores
     scores = []
     @games.each do |game|
@@ -60,5 +70,13 @@ class GameStatistics < Stats
     end
     scores.sort!
     scores
+  end
+
+  def season(season_id)
+    seasons = []
+    @games.each do |game|
+      seasons << game if game.season == season_id
+    end
+    seasons
   end
 end
