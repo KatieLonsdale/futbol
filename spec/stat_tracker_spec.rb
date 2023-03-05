@@ -57,27 +57,27 @@ RSpec.describe StatTracker do
 
   describe '#highest_total_score' do
     it 'returns percentage of ties' do
-      expect(@stat_tracker.highest_total_score).to eq(7)
+      expect(@stat_tracker.highest_total_score).to eq(11)
       expect(@stat_tracker.highest_total_score).to be_a(Integer)
     end
   end
 
   describe '#lowest_total_score' do
     it 'returns percentage of ties' do
-      expect(@stat_tracker.lowest_total_score).to eq(1)
+      expect(@stat_tracker.lowest_total_score).to eq(0)
       expect(@stat_tracker.lowest_total_score).to be_a(Integer)
     end
   end
 
   describe '#average_goals_per_game' do
     it 'returns average goals per game' do
-      expect(@stat_tracker.average_goals_per_game).to eq(4.27)
+      expect(@stat_tracker.average_goals_per_game).to eq(4.22)
     end
   end
 
   describe '#count_of_games_by_season' do
     it 'returns count of games by season' do
-      hash = {"20122013"=>9, "20142015"=>21}
+      hash = {"20122013"=>806, "20132014"=>1323, "20142015"=>1319, "20152016"=>1321, "20162017"=>1317, "20172018"=>1355}
       expect(@stat_tracker.count_of_games_by_season).to eq(hash)
       expect(@stat_tracker.count_of_games_by_season).to be_a(Hash)
       expect(@stat_tracker.count_of_games_by_season.keys.sample).to be_a(String)
@@ -135,7 +135,7 @@ RSpec.describe StatTracker do
       expect(@stat_tracker.worst_coach("20122013")).to eq("Martin Raymond")
     end
   end
-  
+
   # League Statistics
   it 'can count teams' do
     expect(@stat_tracker.count_of_teams).to eq(32)
@@ -151,18 +151,18 @@ RSpec.describe StatTracker do
 
 
   it 'can determine highest scoring visitor' do
-    expect(@stat_tracker.highest_scoring_visitor).to eq("Reign FC")
+    expect(@stat_tracker.highest_scoring_visitor).to eq("FC Dallas")
   end
 
   it 'can determine highest scoring home team' do
-    expect(@stat_tracker.highest_scoring_home_team).to eq("FC Dallas")
+    expect(@stat_tracker.highest_scoring_home_team).to eq("Reign FC")
   end
 
   it 'can determine lowest scoring visitor' do
-    expect(@stat_tracker.lowest_scoring_visitor).to eq("Chicago Red Stars")
+    expect(@stat_tracker.lowest_scoring_visitor).to eq("San Jose Earthquakes")
   end
 
   it 'can determine lowest scoring home team' do
-    expect(@stat_tracker.lowest_scoring_home_team).to eq("Portland Timbers")
+    expect(@stat_tracker.lowest_scoring_home_team).to eq("Utah Royals FC")
   end
 end
