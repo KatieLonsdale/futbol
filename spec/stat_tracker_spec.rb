@@ -33,13 +33,26 @@ RSpec.describe StatTracker do
 
   # Game Statistics
 
+  describe '#highest_total_score' do
+    it 'returns percentage of ties' do
+      expect(@stat_tracker.highest_total_score).to eq(11)
+      expect(@stat_tracker.highest_total_score).to be_a(Integer)
+    end
+  end
+
+  describe '#lowest_total_score' do
+    it 'returns percentage of ties' do
+      expect(@stat_tracker.lowest_total_score).to eq(0)
+      expect(@stat_tracker.lowest_total_score).to be_a(Integer)
+    end
+  end
+
   describe '#percentage_home_wins' do
     it 'returns the percentage of home team wins' do
       expect(@stat_tracker.percentage_home_wins).to eq(0.44)
       expect(@stat_tracker.percentage_home_wins).to be_a Float
     end
   end
-
 
   describe '#percentage_visitor_wins' do
     it 'returns the percentage of visitor team wins' do
@@ -55,26 +68,6 @@ RSpec.describe StatTracker do
     end
   end
 
-  describe '#highest_total_score' do
-    it 'returns percentage of ties' do
-      expect(@stat_tracker.highest_total_score).to eq(11)
-      expect(@stat_tracker.highest_total_score).to be_a(Integer)
-    end
-  end
-
-  describe '#lowest_total_score' do
-    it 'returns percentage of ties' do
-      expect(@stat_tracker.lowest_total_score).to eq(0)
-      expect(@stat_tracker.lowest_total_score).to be_a(Integer)
-    end
-  end
-
-  describe '#average_goals_per_game' do
-    it 'returns average goals per game' do
-      expect(@stat_tracker.average_goals_per_game).to eq(4.22)
-    end
-  end
-
   describe '#count_of_games_by_season' do
     it 'returns count of games by season' do
       hash = {"20122013"=>806, "20132014"=>1323, "20142015"=>1319, "20152016"=>1321, "20162017"=>1317, "20172018"=>1355}
@@ -82,6 +75,12 @@ RSpec.describe StatTracker do
       expect(@stat_tracker.count_of_games_by_season).to be_a(Hash)
       expect(@stat_tracker.count_of_games_by_season.keys.sample).to be_a(String)
       expect(@stat_tracker.count_of_games_by_season.values.sample).to be_a(Integer)
+    end
+  end
+
+  describe '#average_goals_per_game' do
+    it 'returns average goals per game' do
+      expect(@stat_tracker.average_goals_per_game).to eq(4.22)
     end
   end
 
@@ -94,7 +93,62 @@ RSpec.describe StatTracker do
     end
   end
 
+  # League Statistics
+  describe '#count_of_teams' do
+    it 'can count teams' do
+      expect(@stat_tracker.count_of_teams).to eq(32)
+    end
+  end
+
+  describe '#best_offense' do
+    it 'can determine best offense' do
+      expect(@stat_tracker.best_offense).to eq("Reign FC")
+    end
+  end
+
+  describe '#worst_offense' do
+    it 'can determine the worst offense' do
+      expect(@stat_tracker.worst_offense).to eq("Utah Royals FC")
+    end
+  end
+
+  describe '#highest_scoring_visitor' do
+    it 'can determine highest scoring visitor' do
+      expect(@stat_tracker.highest_scoring_visitor).to eq("FC Dallas")
+    end
+  end
+
+  describe '#highest_scoring_home_team' do
+    it 'can determine highest scoring home team' do
+      expect(@stat_tracker.highest_scoring_home_team).to eq("Reign FC")
+    end
+  end
+
+  describe '#lowest_scoring_visitor' do
+    it 'can determine lowest scoring visitor' do
+      expect(@stat_tracker.lowest_scoring_visitor).to eq("San Jose Earthquakes")
+    end
+  end
+
+  describe '#lowest_scoring_home_team' do
+    it 'can determine lowest scoring home team' do
+      expect(@stat_tracker.lowest_scoring_home_team).to eq("Utah Royals FC")
+    end
+  end
+
   # Season Statistics
+
+  describe '#winningest_coach' do
+    it 'returns coach with best winning percentage for given season' do
+      expect(@stat_tracker.winningest_coach("20122013")).to eq("Dan Lacroix")
+    end
+  end
+
+  describe '#worst_coach' do
+    it 'returns coach with the worst percentage for given season' do
+      expect(@stat_tracker.worst_coach("20122013")).to eq("Martin Raymond")
+    end
+  end
 
   describe '#most_accurate_team' do
     it 'returns the team with the best ratio of shots to goals' do
@@ -122,47 +176,5 @@ RSpec.describe StatTracker do
       expect(@stat_tracker.fewest_tackles('20122013')).to eq('Atlanta United')
       expect(@stat_tracker.fewest_tackles('20142015')).to eq('Orlando City SC')
     end
-  end
-
-  describe '#winningest_coach' do
-    it 'returns coach with best winning percentage for given season' do
-      expect(@stat_tracker.winningest_coach("20122013")).to eq("Dan Lacroix")
-    end
-  end
-
-  describe '#worst_coach' do
-    it 'returns coach with the worst percentage for given season' do
-      expect(@stat_tracker.worst_coach("20122013")).to eq("Martin Raymond")
-    end
-  end
-
-  # League Statistics
-  it 'can count teams' do
-    expect(@stat_tracker.count_of_teams).to eq(32)
-  end
-
-  it 'can determine best offense' do
-    expect(@stat_tracker.best_offense).to eq("Reign FC")
-  end
-
-  it 'can determine the worst offense' do
-    expect(@stat_tracker.worst_offense).to eq("Utah Royals FC")
-  end
-
-
-  it 'can determine highest scoring visitor' do
-    expect(@stat_tracker.highest_scoring_visitor).to eq("FC Dallas")
-  end
-
-  it 'can determine highest scoring home team' do
-    expect(@stat_tracker.highest_scoring_home_team).to eq("Reign FC")
-  end
-
-  it 'can determine lowest scoring visitor' do
-    expect(@stat_tracker.lowest_scoring_visitor).to eq("San Jose Earthquakes")
-  end
-
-  it 'can determine lowest scoring home team' do
-    expect(@stat_tracker.lowest_scoring_home_team).to eq("Utah Royals FC")
   end
 end
