@@ -43,6 +43,28 @@ class SeasonStatistics < Stats
     team_by_id(team.first)
   end
 
+  def winningest_coach(season)
+    games_in_season = filter_game_teams_by_season(season)
+    games_by_coach = games_in_season.group_by{|game_team| game_team.head_coach}
+    games_by_coach = win_percentage(games_by_coach)
+    games_by_coach.max_by{|coach, win_percentage| win_percentage}.first
+  end
+
+  def worst_coach(season)
+    games_in_season = filter_game_teams_by_season(season)
+    games_by_coach = games_in_season.group_by{|game_team| game_team.head_coach}
+    games_by_coach = win_percentage(games_by_coach)
+    games_by_coach.min_by{|coach, win_percentage| win_percentage}.first
+  end
+
+  def win_percentage(games_by_coach)
+    games_by_coach.transform_values do |games|
+      win = 0
+      games.each { |game| win += 1 if game.result == "WIN" }
+      win.fdiv(games.count)
+    end
+  end
+
   def filter_game_teams_by_season(season)
     year = season[0,4]
     @game_teams.select{|game| game.game_id.start_with?(year)}
