@@ -79,4 +79,34 @@ end
       expect(@stat_tracker.fewest_tackles('20142015')).to eq('Orlando City SC')
     end
   end
+
+  # League Statistics
+  it 'can count teams' do
+    expect(@stat_tracker.count_of_teams).to eq(32)
+  end
+
+  it 'can determine best offense' do
+    expect(@stat_tracker.best_offense).to eq("Reign FC")
+  end
+
+  it 'can determine the worst offense' do
+    expect(@stat_tracker.worst_offense).to eq("Utah Royals FC")
+  end
+
+
+  it 'can determine highest scoring visitor' do
+    expect(@stat_tracker.highest_scoring_visitor).to eq("Reign FC")
+  end
+
+  it 'can determine highest scoring home team' do
+    expect(@stat_tracker.highest_scoring_home_team).to eq("FC Dallas")
+  end
+
+  it 'can determine lowest scoring visitor' do
+    expect(@stat_tracker.lowest_scoring_visitor).to eq("Chicago Red Stars")
+  end
+
+  it 'can determine lowest scoring home team' do
+    expect(@stat_tracker.lowest_scoring_home_team).to eq("Portland Timbers")
+  end
 end
