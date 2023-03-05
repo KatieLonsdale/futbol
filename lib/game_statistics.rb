@@ -70,12 +70,4 @@ class GameStatistics < Stats
     scores.sort!
     scores
   end
-
-  def season(season_id)
-    seasons = []
-    @games.each do |game|
-      seasons << game if game.season == season_id
-    end
-    seasons
-  end
 end
