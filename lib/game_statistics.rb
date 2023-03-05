@@ -53,13 +53,10 @@ class GameStatistics < Stats
   end
 
   def average_goals_by_season
-    average_goals_by_season = Hash.new(0)
-    @games.each do |game|
-      average_goals = (game.away_goals + game.home_goals).fdiv(season(game.season).count).round(2)
-      average_goals_by_season[game.season] += (average_goals)
-      (sorted_scores.sum).fdiv(sorted_scores.length)
+    games_by_season = @games.group_by{|game|game.season}
+    goals_by_season = games_by_season.transform_values do |games|
+      games.map{|game| game.home_goals + game.away_goals}.sum.fdiv(games.length).round(2)
     end
-    average_goals_by_season
   end
 
 # Helper Methods
