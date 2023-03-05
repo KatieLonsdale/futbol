@@ -37,6 +37,26 @@ class StatTracker
     @league.best_offense
   end
 
+  def worst_offense
+    @league.worst_offense
+  end
+
+  def highest_scoring_visitor
+    @league.highest_scoring_visitor
+  end
+
+  def lowest_scoring_visitor
+    @league.lowest_scoring_visitor
+  end
+
+  def highest_scoring_home_team
+    @league.highest_scoring_home_team
+  end
+
+  def lowest_scoring_home_team
+    @league.lowest_scoring_home_team
+  end
+
   # Season Stats
   def most_accurate_team(season)
     @season.most_accurate_team(season)
