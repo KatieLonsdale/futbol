@@ -5,57 +5,55 @@ class SeasonStatistics < Stats
     super
   end
 
+  def winningest_coach(season)
+    games_in_season = filter_game_teams_by_season(season)
+    games_by_coach = games_in_season.group_by{|game_team| game_team.head_coach}
+    coach_win_rate = win_percentage(games_by_coach)
+    coach_win_rate.max_by{|coach, win_percentage| win_percentage}.first
+  end
+
+  def worst_coach(season)
+    games_in_season = filter_game_teams_by_season(season)
+    games_by_coach = games_in_season.group_by{|game_team| game_team.head_coach}
+    coach_win_rate = win_percentage(games_by_coach)
+    coach_win_rate.min_by{|coach, win_percentage| win_percentage}.first
+  end
+
   def most_accurate_team(season)
     games_in_season = filter_game_teams_by_season(season)
     games_by_team = games_in_season.group_by {|game_team| game_team.team_id}
-    games_by_team = goals_and_shots_by_team(games_by_team)
-    games_by_team = games_by_team.transform_values! do |array| 
-      accuracy(array[0], array[1])
-    end
-    team = games_by_team.max_by{|team, accuracy| accuracy}
+    goals_and_shots = goals_and_shots_by_team(games_by_team)
+    accuracy_by_team = accuracy(goals_and_shots)
+    team = accuracy_by_team.max_by{|team, accuracy| accuracy}
     team_by_id(team.first)
   end
 
   def least_accurate_team(season)
     games_in_season = filter_game_teams_by_season(season)
     games_by_team = games_in_season.group_by {|game_team| game_team.team_id}
-    games_by_team = goals_and_shots_by_team(games_by_team)
-    games_by_team = games_by_team.transform_values! do |array| 
-      accuracy(array[0], array[1])
-    end
-    team = games_by_team.min_by{|team, accuracy| accuracy}
+    goals_and_shots = goals_and_shots_by_team(games_by_team)
+    accuracy_by_team = accuracy(goals_and_shots)
+    team = accuracy_by_team.min_by{|team, accuracy| accuracy}
     team_by_id(team.first)
   end
 
   def most_tackles(season)
     games_in_season = filter_game_teams_by_season(season)
     games_by_team = games_in_season.group_by{|game_team| game_team.team_id}
-    games_by_team = tackles_by_team(games_by_team)
-    team = games_by_team.max_by{|team, tackles| tackles}
+    total_tackles = tackles_by_team(games_by_team)
+    team = total_tackles.max_by{|team, tackles| tackles}
     team_by_id(team.first)
   end
 
   def fewest_tackles(season)
     games_in_season = filter_game_teams_by_season(season)
     games_by_team = games_in_season.group_by{|game_team| game_team.team_id}
-    games_by_team = tackles_by_team(games_by_team)
-    team = games_by_team.min_by{|team, tackles| tackles}
+    total_tackles = tackles_by_team(games_by_team)
+    team = total_tackles.min_by{|team, tackles| tackles}
     team_by_id(team.first)
   end
 
-  def winningest_coach(season)
-    games_in_season = filter_game_teams_by_season(season)
-    games_by_coach = games_in_season.group_by{|game_team| game_team.head_coach}
-    games_by_coach = win_percentage(games_by_coach)
-    games_by_coach.max_by{|coach, win_percentage| win_percentage}.first
-  end
-
-  def worst_coach(season)
-    games_in_season = filter_game_teams_by_season(season)
-    games_by_coach = games_in_season.group_by{|game_team| game_team.head_coach}
-    games_by_coach = win_percentage(games_by_coach)
-    games_by_coach.min_by{|coach, win_percentage| win_percentage}.first
-  end
+  # Helper Methods
 
   def win_percentage(games_by_coach)
     games_by_coach.transform_values do |games|
@@ -87,8 +85,10 @@ class SeasonStatistics < Stats
     end
   end
 
-  def accuracy(goals, shots)
-    goals.fdiv(shots).round(5)
+  def accuracy(goals_and_shots)
+    goals_and_shots.transform_values! do |array| 
+      array[0].fdiv(array[1]).round(5)
+    end
   end
 
   def team_by_id(id)
