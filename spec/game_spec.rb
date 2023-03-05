@@ -14,11 +14,11 @@ RSpec.describe Game do
     @game = Game.new(hash)
   end
 
-  it 'exists' do
-    expect(@game).to be_a(Game)
-  end
-
-  describe 'has attributes' do
+  describe '#initialize' do
+    it 'exists' do
+      expect(@game).to be_a(Game)
+    end
+    
     it '#game_id' do
       expect(@game.game_id).to eq(2012030221)
     end
