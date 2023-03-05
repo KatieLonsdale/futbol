@@ -12,6 +12,7 @@ RSpec.describe SeasonStatistics do
     }
     @season_stats = SeasonStatistics.new(@locations)
   end
+  
   describe '#initialize' do
     it 'exists' do 
       expect(@season_stats).to be_a SeasonStatistics
@@ -31,6 +32,20 @@ RSpec.describe SeasonStatistics do
     it 'has game_teams' do
       expect(@season_stats.game_teams).to be_a Array
       expect(@season_stats.game_teams.sample).to be_a GameTeams
+    end
+  end
+
+  describe '#winningest_coach' do
+    it 'returns coach with best winning percentage for given season' do
+      expect(@season_stats.winningest_coach("20122013")).to be_a(String)
+      expect(@season_stats.winningest_coach("20122013")).to eq("Joel Quenneville")
+    end
+  end
+
+  describe '#worst_coach' do
+    it 'returns coach with the worst percentage for given season' do
+      expect(@season_stats.worst_coach("20122013")).to be_a(String)
+      expect(@season_stats.worst_coach("20122013")).to eq("Claude Noel")
     end
   end
 
@@ -62,17 +77,24 @@ RSpec.describe SeasonStatistics do
     end
   end
 
-  describe '#winningest_coach' do
-    it 'returns coach with best winning percentage for given season' do
-      expect(@season_stats.winningest_coach("20122013")).to be_a(String)
-      expect(@season_stats.winningest_coach("20122013")).to eq("Joel Quenneville")
-    end
-  end
+  # Helper Methods 
 
-  describe '#worst_coach' do
-    it 'returns coach with the worst percentage for given season' do
-      expect(@season_stats.worst_coach("20122013")).to be_a(String)
-      expect(@season_stats.worst_coach("20122013")).to eq("Claude Noel")
+  describe '#win_percentage' do
+    it 'returns win percentage of coach' do
+      mock_game_1 = double()
+      mock_game_2 = double()
+      mock_game_3 = double()
+      mock_game_4 = double()
+      given_hash = {coach: [mock_game_1, mock_game_3], 
+        coach2: [mock_game_2, mock_game_4]}
+      expected_hash = {coach: 0.5, coach2: 0}
+
+      allow(mock_game_1).to receive(:result).and_return('WIN')
+      allow(mock_game_2).to receive(:result).and_return('LOSS')
+      allow(mock_game_3).to receive(:result).and_return('LOSS')
+      allow(mock_game_4).to receive(:result).and_return('TIE')
+
+      expect(@season_stats.win_percentage(given_hash)).to eq(expected_hash)
     end
   end
 
@@ -115,8 +137,10 @@ RSpec.describe SeasonStatistics do
 
   describe '#accuracy' do
     it 'returns goals divided by number of shots' do
-      expect(@season_stats.accuracy(5,10)).to eq 0.50000
-      expect(@season_stats.accuracy(3, 9)).to eq 0.33333
+      given_hash = {team: [5, 10], team2: [3, 9]}
+      expected_hash = {team: 0.50000, team2: 0.33333}
+
+      expect(@season_stats.accuracy(given_hash)).to eq(expected_hash)
     end
   end
 
