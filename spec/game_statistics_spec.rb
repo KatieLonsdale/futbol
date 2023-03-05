@@ -69,13 +69,6 @@ RSpec.describe GameStatistics do
     end
   end
 
-  describe '#sorted_scores' do
-    it 'returns percentage of ties' do
-      expect(@game_stats.sorted_scores).to be_a(Array)
-      expect(@game_stats.sorted_scores.sample).to be_a(Integer)
-    end
-  end
-
   describe '#average_goals_per_game' do
     it 'returns average goals per game' do
       expect(@game_stats.average_goals_per_game).to eq(4.27)
@@ -84,20 +77,27 @@ RSpec.describe GameStatistics do
 
   describe '#count_of_games_by_season' do
     it 'returns count of games by season' do
-      hash = {"20122013"=>9, "20142015"=>21}
+      hash = {"20122013" => 9, "20142015" => 21}
       expect(@game_stats.count_of_games_by_season).to eq(hash)
-      expect(@game_stats.count_of_games_by_season).to be_a(Hash)
-      expect(@game_stats.count_of_games_by_season.keys.sample).to be_a(String)
-      expect(@game_stats.count_of_games_by_season.values.sample).to be_a(Integer)
     end
   end
 
   describe '#average_goals_by_season' do
     it 'returns average goals by season' do
       hash = {'20122013' => 3.78, '20142015' => 4.48}
-      expect(@game_stats.average_goals_by_season).to be_a(Hash)
-      expect(@game_stats.average_goals_by_season.keys.sample).to be_a(String)
-      expect(@game_stats.average_goals_by_season.values.sample).to be_a(Float)
+      expect(@game_stats.average_goals_by_season).to eq(hash)
+    end
+  end
+
+  # Helper Methods
+
+  describe '#sorted_scores' do
+    it 'returns percentage of ties' do
+      expected_array = [1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5,
+       5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 7, 7, 7]
+      expect(@game_stats.sorted_scores).to eq(expected_array)
+      expect(@game_stats.sorted_scores).to be_a(Array)
+      expect(@game_stats.sorted_scores.sample).to be_a(Integer)
     end
   end
 end
