@@ -1,5 +1,4 @@
 require './spec/spec_helper'
-# require 'csv'
 
 game_path = './data/games.csv'
 team_path = './data/teams.csv'
