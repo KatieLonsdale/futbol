@@ -15,11 +15,11 @@ RSpec.describe GameTeams do
     @game_teams = GameTeams.new(game_teams_info)
   end
 
-  it 'exists' do
-    expect(@game_teams).to be_a(GameTeams)
-  end
+  describe '#initialize' do
+    it 'exists' do
+      expect(@game_teams).to be_a(GameTeams)
+    end
 
-  describe 'has attributes' do
     it '#game_id' do
       expect(@game_teams.game_id).to eq(2012030221)
     end
