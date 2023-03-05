@@ -38,6 +38,7 @@ RSpec.describe StatTracker do
       expect(@stat_tracker.percentage_home_wins).to eq(0.44)
       expect(@stat_tracker.percentage_home_wins).to be_a Float
     end
+  end
 
 
   describe '#percentage_visitor_wins' do
@@ -133,7 +134,8 @@ RSpec.describe StatTracker do
     it 'returns coach with the worst percentage for given season' do
       expect(@stat_tracker.worst_coach("20122013")).to eq("Martin Raymond")
     end
-
+  end
+  
   # League Statistics
   it 'can count teams' do
     expect(@stat_tracker.count_of_teams).to eq(32)
