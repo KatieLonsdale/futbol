@@ -36,30 +36,29 @@ RSpec.describe SeasonStatistics do
 
   describe '#most_accurate_team' do
     it 'returns the team with the best ratio of shots to goals' do
-      expect(@season_stats.most_accurate_team('20122013')).to eq('FC Dallas')
-      expect(@season_stats.most_accurate_team('20142015')).to eq('Utah Royals FC')
+      expect(@season_stats.most_accurate_team('20122013')).to eq('Minnesota United FC')
+      expect(@season_stats.most_accurate_team('20132014')).to eq('North Carolina Courage')
     end
   end
 
   describe '#least_accurate_team' do
     it 'returns the team with the worst ratio of shots to goals' do
-      expect(@season_stats.least_accurate_team('20122013')).to eq('Houston Dynamo')
-      expect(@season_stats.least_accurate_team('20142015')).to eq('Columbus Crew SC')
-      # not sure what to do in event of tie
+      expect(@season_stats.least_accurate_team('20122013')).to eq('FC Cincinnati')
+      expect(@season_stats.least_accurate_team('20132014')).to eq('FC Cincinnati')
     end
   end
 
   describe '#most_tackles' do
     it 'returns the team with the most tackles in given season' do
       expect(@season_stats.most_tackles('20122013')).to eq('Houston Dynamo')
-      expect(@season_stats.most_tackles('20142015')).to eq('Orlando Pride')
+      expect(@season_stats.most_tackles('20132014')).to eq('Vancouver Whitecaps FC')
     end
   end
 
   describe '#fewest_tackles' do
     it 'returns the team with the least tackles in given season' do
-      expect(@season_stats.fewest_tackles('20122013')).to eq('FC Dallas')
-      expect(@season_stats.fewest_tackles('20142015')).to eq('New England Revolution')
+      expect(@season_stats.fewest_tackles('20122013')).to eq('New England Revolution')
+      expect(@season_stats.fewest_tackles('20132014')).to eq('Chicago Fire')
     end
   end
 
