@@ -109,5 +109,4 @@ end
   it 'can determine lowest scoring home team' do
     expect(@stat_tracker.lowest_scoring_home_team).to eq("Portland Timbers")
   end
-
 end
