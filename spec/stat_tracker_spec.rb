@@ -79,4 +79,16 @@ end
       expect(@stat_tracker.fewest_tackles('20142015')).to eq('Orlando City SC')
     end
   end
+
+  describe '#winningest_coach' do
+    it 'returns coach with best winning percentage for given season' do
+      expect(@stat_tracker.winningest_coach("20122013")).to eq("Dan Lacroix")
+    end
+  end
+
+  describe '#worst_coach' do
+    it 'returns coach with the worst percentage for given season' do
+      expect(@stat_tracker.worst_coach("20122013")).to eq("Martin Raymond")
+    end
+  end
 end
