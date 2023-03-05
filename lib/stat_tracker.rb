@@ -28,6 +28,14 @@ class StatTracker
   end
 
   # League Stats
+  
+  def count_of_teams
+    @league.count_of_teams
+  end
+
+  def best_offense
+    @league.best_offense
+  end
 
   # Season Stats
   def most_accurate_team(season)
