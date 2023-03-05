@@ -64,7 +64,7 @@ RSpec.describe SeasonStatistics do
 
   describe '#winningest_coach' do
     it 'returns coach with best winning percentage for given season' do
-      expect()
+      expect(@season_stats.winningest_coach("20122013")).to be_a(String)
     end
   end
 
