@@ -43,6 +43,15 @@ class SeasonStatistics < Stats
     team_by_id(team.first)
   end
 
+  def winningest_coach(season)
+  end
+  #number of games played in a season by a coach(helper method)
+  #number of games won
+  #average
+  #return the highest average coach name ""
+
+  #def games_played_in_season(season)
+
   def filter_game_teams_by_season(season)
     year = season[0,4]
     @game_teams.select{|game| game.game_id.start_with?(year)}
