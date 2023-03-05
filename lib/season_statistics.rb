@@ -46,7 +46,8 @@ class SeasonStatistics < Stats
   def winningest_coach(season)
     games_in_season = filter_game_teams_by_season(season)
     games_by_coach = games_in_season.group_by{|game_team| game_team.head_coach}
-    require 'pry'; binding.pry
+    games_by_coach = win_percentage(games_by_coach)
+    games_by_coach.max_by{|coach, win_percentage| win_percentage}.first
   end
   #number of games played in a season by a coach(helper method?)
   #number of games won
@@ -54,11 +55,10 @@ class SeasonStatistics < Stats
   #return the highest average coach name ""
 
   def win_percentage(games_by_coach)
-    win = 0
-    games_by_coach.each do |coach, games|
-      games.each do |game|
-        win += 1 if game.result == "WIN"
-      end
+    games_by_coach.transform_values do |games|
+      win = 0
+      games.each { |game| win += 1 if game.result == "WIN" }
+      win.fdiv(games.count)
     end
   end
 
