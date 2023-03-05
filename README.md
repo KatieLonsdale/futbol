@@ -20,6 +20,23 @@ At the beginning, we each talked about what worked well for us and didn’t work
 
 We spent the first night throwing out ideas for how we could approach the code design. We used the Figma board to visually illustrate our thoughts. We slept on it, and the next day we expanded on the idea and added more to the Figma board. We agreed we had enough to move forward and that we can come back and update it as we go.
 
+<b><u>Presentation</b></u>
+
+- What formats did the group consider?
+We looked at Mural and Atlassian. We also had seem some other examples from other groups that were very creative and artsy.
+
+-Why did you choose the format you did?
+Atlassian - thought it was the most straightforward - just like us!
+We liked the overall structure of it, but didn’t necessarily do every exact idea they proposed.
+We liked that it was time boxed already so we knew how long everything should take.
+
+-Did this retro feel effective? What might you try differently the next time you run a group retro?
+Yes, it was an open and honest conversation.
+
+-Take time to reflect first and write down answers to questions that we’ll share
+Summarize the outcome of the retro.
+We felt it was a good retro and we were able to have good conversations. We each wrote which action we wanted to prioritize at the end.
+
 <b><u>DTR Docs</u></b>
  - https://docs.google.com/document/d/1lJN1a8VZyoTeBspCIG2fPeKBW44k_ktj7SzEHRYAJlM/edit?usp=sharing Completed 2/27
 
