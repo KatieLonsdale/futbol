@@ -66,7 +66,13 @@ RSpec.describe SeasonStatistics do
     it 'returns coach with best winning percentage for given season' do
       expect(@season_stats.winningest_coach("20122013")).to be_a(String)
       expect(@season_stats.winningest_coach("20122013")).to eq("Joel Quenneville")
+    end
+  end
 
+  describe '#worst_coach' do
+    it 'returns coach with the worst percentage for given season' do
+      expect(@season_stats.worst_coach("20122013")).to be_a(String)
+      expect(@season_stats.worst_coach("20122013")).to eq("Claude Noel")
     end
   end
 
