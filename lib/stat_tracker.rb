@@ -15,6 +15,14 @@ class StatTracker
 
   # Game Stats
 
+  def highest_total_score
+   @game.highest_total_score
+  end
+
+  def lowest_total_score
+    @game.lowest_total_score
+  end
+
   def percentage_home_wins
     @game.percentage_home_wins
   end
@@ -25,6 +33,18 @@ class StatTracker
 
   def percentage_ties
     @game.percentage_ties
+  end
+
+  def count_of_games_by_season
+    @game.count_of_games_by_season
+  end
+
+  def average_goals_per_game
+    @game.average_goals_per_game
+  end
+
+  def average_goals_by_season
+    @game.average_goals_by_season
   end
 
   # League Stats
@@ -45,12 +65,12 @@ class StatTracker
     @league.highest_scoring_visitor
   end
 
-  def lowest_scoring_visitor
-    @league.lowest_scoring_visitor
-  end
-
   def highest_scoring_home_team
     @league.highest_scoring_home_team
+  end
+
+  def lowest_scoring_visitor
+    @league.lowest_scoring_visitor
   end
 
   def lowest_scoring_home_team
@@ -74,4 +94,3 @@ class StatTracker
     @season.fewest_tackles(season)
   end
 end
-

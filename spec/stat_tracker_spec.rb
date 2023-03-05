@@ -31,12 +31,14 @@ RSpec.describe StatTracker do
     end
   end
 
+  # Game Statistics
+
   describe '#percentage_home_wins' do
     it 'returns the percentage of home team wins' do
       expect(@stat_tracker.percentage_home_wins).to eq(0.44)
       expect(@stat_tracker.percentage_home_wins).to be_a Float
     end
-end
+
 
   describe '#percentage_visitor_wins' do
     it 'returns the percentage of visitor team wins' do
@@ -51,6 +53,47 @@ end
       expect(@stat_tracker.percentage_ties).to be_a Float
     end
   end
+
+  describe '#highest_total_score' do
+    it 'returns percentage of ties' do
+      expect(@stat_tracker.highest_total_score).to eq(7)
+      expect(@stat_tracker.highest_total_score).to be_a(Integer)
+    end
+  end
+
+  describe '#lowest_total_score' do
+    it 'returns percentage of ties' do
+      expect(@stat_tracker.lowest_total_score).to eq(1)
+      expect(@stat_tracker.lowest_total_score).to be_a(Integer)
+    end
+  end
+
+  describe '#average_goals_per_game' do
+    it 'returns average goals per game' do
+      expect(@stat_tracker.average_goals_per_game).to eq(4.27)
+    end
+  end
+
+  describe '#count_of_games_by_season' do
+    it 'returns count of games by season' do
+      hash = {"20122013"=>9, "20142015"=>21}
+      expect(@stat_tracker.count_of_games_by_season).to eq(hash)
+      expect(@stat_tracker.count_of_games_by_season).to be_a(Hash)
+      expect(@stat_tracker.count_of_games_by_season.keys.sample).to be_a(String)
+      expect(@stat_tracker.count_of_games_by_season.values.sample).to be_a(Integer)
+    end
+  end
+
+  describe '#average_goals_by_season' do
+    it 'returns average goals by season' do
+      hash = {'20122013' => 3.78, '20142015' => 4.48}
+      expect(@stat_tracker.average_goals_by_season).to be_a(Hash)
+      expect(@stat_tracker.average_goals_by_season.keys.sample).to be_a(String)
+      expect(@stat_tracker.average_goals_by_season.values.sample).to be_a(Float)
+    end
+  end
+
+  # Season Statistics
 
   describe '#most_accurate_team' do
     it 'returns the team with the best ratio of shots to goals' do
